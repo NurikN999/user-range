@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('users/{id}/increase-rank', [UserController::class, 'increaseRank']);
+    Route::post('users/{id}/decrease-rank', [UserController::class, 'decreaseRank']);
+    Route::get('users/rank', [UserController::class, 'getRank']);
+    Route::post('users/cache', [UserController::class, 'cacheUsers']);
 });
