@@ -3,7 +3,7 @@
 #### Документация к API
 
 ```
- [POST] /api/login
+ [POST] /api/register
 ```
 
 Тело запроса
